@@ -10,22 +10,7 @@ app.use(router)
 
 // app.use(express.json())
 
-const sql = require('mssql')
-const sqlConfig = {
-    user: "root",
-    password: "root",
-    database: "web",
-    server: 'localhost:3306',
-    pool: {
-        max: 10,
-        min: 0,
-        idleTimeoutMillis: 30000
-    },
-    options: {
-        encrypt: true, // for azure
-        trustServerCertificate: false // change to true for local dev / self-signed certs
-    }
-}
+
 const { Sequelize } = require('sequelize');
 const sequelize = new Sequelize('web', 'root', 'root', {
     host: 'localhost',
@@ -34,9 +19,14 @@ const sequelize = new Sequelize('web', 'root', 'root', {
 });
 const onclick = async() => {
     const { QueryTypes } = require('sequelize');
+    // 查询blogs并格式化数据
     let blogs = await sequelize.query("SELECT * FROM `blogs`", { type: QueryTypes.SELECT });
-
-    console.log("blogs", blogs)
+    let data2 = Object.entries(blogs.reduce((o, v) =>
+            (Reflect.has(o, v.title) ?
+                Reflect.get(o, v.title).push(v) :
+                Reflect.set(o, v.title, []), Reflect.deleteProperty(v, 'title'), o), {}))
+        .map(v => ({ title: v[0], SecondNavBar: v[1] }))
+    console.log("blogs", data2)
 }
 onclick()
 
