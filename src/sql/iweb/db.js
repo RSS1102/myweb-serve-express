@@ -1,5 +1,5 @@
 const { Sequelize } = require('sequelize');
-const sequelize = new Sequelize('web', 'root', 'root', {
+const db = new Sequelize('web', 'root', 'root', {
     host: 'localhost',
     port: '3306',
     dialect: 'mysql',
@@ -21,5 +21,5 @@ const sequelize = new Sequelize('web', 'root', 'root', {
 })
 
 module.exports = {
-    sequelize
+    db
 }

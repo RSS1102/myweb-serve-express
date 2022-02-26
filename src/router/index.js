@@ -3,6 +3,8 @@ const router = express.Router()
     // 引入
 const blogs = require('../controller/blogs')
 
-router.get('/api/blogs/menu', blogs.menu)
+// blogs
+router.get('/api/blogs/getmenu', blogs.getMenu)
+router.post('/api/blogs/setmenu', blogs.setMenu)
 
 module.exports = router
