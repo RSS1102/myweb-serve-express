@@ -1,4 +1,4 @@
-const { db } = require('../sql/iweb/db');
+const { db } = require('../../sql/iweb/db');
 const { QueryTypes } = require('sequelize');
 module.exports = {
     async getMenu(req, res) {
@@ -22,7 +22,7 @@ module.exports = {
     async setMenu(req, res) {
         let body = req.body
         console.log(body)
-        const { Blogs } = require('../sql/iweb/blogs');
+        const { Blogs } = require('../../sql/iweb/blogs');
         await Blogs.create(body)
             .then(date => {
                 console.log(date)
