@@ -24,37 +24,50 @@ app.get('/', async(req, res) => {
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
 })
-const test = () => {
-        //获取所有的库 https://api.github.com/users/{username}/repos
-        let options = {
-                method: 'GET',
-                port: 443, //https的默认port：443
-                hostname: 'api.github.com', //这里不需要用https：//
-                path: '/users/RSS1102/repos',
-                headers: {
-                    'User-Agent': 'RSS1102'
-                } //用来验证用户见：https://blog.csdn.net/zhuming3834/article/details/77649960
+const getWarehouseCommit = (wareName) => {
+    //获取所有的库 https://api.github.com/users/{username}/repos
+    let options = {
+            method: 'GET',
+            port: 443, //https的默认port：443
+            hostname: 'api.github.com', //这里不需要用https：//
+            path: `/repos/RSS1102/${wareName}/commits?per_page=1`,
+            //用来验证用户姓名和token ：https://blog.csdn.net/zhuming3834/article/details/7764996
+            //
+            headers: {
+                'User-Agent': 'RSS1102',
+                'Authorization': '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',
             }
-            // 这里不能用request,用get
-        https.get(options, _res => {
-            let body = '';
-            _res.on('data', data => body += data);
-            _res.on('end', () => {
-                console.log(body)
-            })
-            _res.on('error', err => {
-                console.log("err", err)
-            })
+        }
+        // 这里不能用request,用get
+    https.get(options, _res => {
+        let body = [];
+        _res.on('data', data => body += data); //JSON.parse(body)
+        _res.on('end', () => {
+            console.log("body", JSON.parse(body))
 
+            let updateObj = {
+                message: JSON.parse(body)[0].commit.message,
+                author_name: JSON.parse(body)[0].commit.author.name,
+                committer_avatar_url: JSON.parse(body)[0].committer.avatar_url,
+                committer_html_url: JSON.parse(body)[0].committer.html_url,
+                author_date: JSON.parse(body)[0].commit.committer.date,
+            }
+            console.log(updateObj)
         })
-
-
-    }
-    // test()
+        _res.on('error', err => {
+            console.log("err", err)
+        })
+    })
+}
+wareName = 'myweb-serve-express'
+getWarehouseCommit(wareName)
+    // console.log(getWarehouseCommit())
     // 处理数据1
 let { userku } = require('../json/git')
 let myWarehouse = []
 for (let i = 0; i < userku.length; i++) {
+    let wareName = userku[i].name
+        // getWarehouseCommit(wareName)
     let data = {
         name: userku[i].name,
         description: userku[i].description,
@@ -63,9 +76,12 @@ for (let i = 0; i < userku.length; i++) {
         forks_url: userku[i].forks_url,
         topics: userku[i].topics,
         language: userku[i].language,
-        pushed_at: userku[i].pushed_at,
+
+        stargazers_count: userku[i].stargazers_count,
     }
     myWarehouse.push(data)
 
+    // Object.assign
+
 }
-console.log(myWarehouse)
+// console.log(myWarehouse)
