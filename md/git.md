@@ -30,7 +30,7 @@
 
    访问后登陆github：https://github.com/settings/tokens
 
-   **[text-token](https://github.com/settings/tokens/811616296)** ：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（**no-scope**）
+   **[text-token](https://github.com/settings/tokens/811616296)**  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 **no-scope**）
 
 3. ### 主要GitHubApi：
 

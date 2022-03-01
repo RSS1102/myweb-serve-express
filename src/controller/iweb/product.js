@@ -1,5 +1,6 @@
 module.exports = {
     getGithubList(req, res) {
+        // 获取用户所有的仓库地址和信息（public）
         let options = {
                 method: 'GET',
                 port: 443, //https的默认port：443
