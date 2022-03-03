@@ -20,8 +20,6 @@ module.exports = {
             _res.on('error', err => {
                 console.log("err", err)
             })
-
         })
-
     }
 }
