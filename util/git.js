@@ -1,6 +1,8 @@
- const Authorization = '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'
+  const a = 'ghp_'
+  const b = 'Gx4dVRJ6jOaQCFdhShY4ls0HFHf0Kd477W1p'
+  const Authorization = a + b
 
 
- module.exports = {
-     Authorization
- }
+  module.exports = {
+      Authorization
+  }

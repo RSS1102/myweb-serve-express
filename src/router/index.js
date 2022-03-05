@@ -3,7 +3,8 @@ const router = express.Router()
     // 引入
 const blogs = require('../controller/iweb/blogs')
 const githubList = require('../controller/iweb/product')
-    // blogs
+
+// blogs
 router.get('/api/blogs/getmenu', blogs.getMenu)
 router.post('/api/blogs/setmenu', blogs.setMenu)
     //getGithubList
