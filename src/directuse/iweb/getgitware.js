@@ -1,8 +1,9 @@
 const reqs = require('request-promise');
 const { Authorization } = require('../../../util/git')
-const { wareHouse, wareTopics, wareCommit } = require('../../sql/iweb/product');
+const { wareHouse } = require('../../sql/iweb/product');
 module.exports = {
     async getware() {
+        // 数据库
         let usersOptions = {
             uri: 'https://api.github.com/users/RSS1102/repos',
             method: 'GET',
@@ -17,95 +18,69 @@ module.exports = {
         await reqs(usersOptions)
             .then(res => {
                 userku = JSON.parse(res)
-                console.log("userku", userku)
-
             })
         for (let i = 0; i < userku.length; i++) {
             let wareName = userku[i].name
+            let languageOptions = {
+                uri: `https://api.github.com/repos/RSS1102/${wareName}/languages`,
+                method: 'GET',
+                port: 443,
+                headers: {
+                    'User-Agent': 'RSS1102',
+                    'Authorization': Authorization,
+                }
+            }
+            let commitOptions = {
+                    uri: `https://api.github.com/repos/RSS1102/${wareName}/commits?per_page=1`,
+                    method: 'GET',
+                    port: 443,
+                    headers: {
+                        'User-Agent': 'RSS1102',
+                        'Authorization': Authorization,
+                    }
+                }
+                // 2，获取使用的语言
+            let usersLanguage = {}
+            await reqs(languageOptions)
+                .then(res => {
+                    usersLanguage = JSON.parse(res)
+                })
+
+            // 3，获取commit信息
+            let usersCommit = {}
+            await reqs(commitOptions)
+                .then(res => {
+                    usersCommit = JSON.parse(res)[0]
+                        // 判断authors与committer是否存在   
+                    let commitAothor = {}
+                    usersCommit.author ? commitAothor = usersCommit.author : (usersCommit.committer ? commitAothor = usersCommit.committer : '')
+                    usersCommit = {
+                        commit_message: usersCommit.commit.message,
+                        commit_name: usersCommit.commit.author.name,
+                        commit_avatar: commitAothor.avatar_url,
+                        commit_html: commitAothor.html_url,
+                        commit_date: usersCommit.commit.committer.date,
+                    }
+                })
+
             let userWarehouse = {
                 name: userku[i].name,
                 description: userku[i].description,
                 url: userku[i].url,
                 forks_url: userku[i].forks_url,
-                language: userku[i].language,
                 stargazers_count: userku[i].stargazers_count,
                 fork: userku[i].fork,
-
+                warelanguage: usersLanguage,
+                warecommit: usersCommit,
+                waretopics: Object.assign({}, userku[i].topics),
             }
+            console.log("userWarehouse", userWarehouse)
             await wareHouse.upsert(userWarehouse)
                 .then(date => {
-                    // console.log(date)
+                    console.log("date", date)
                 }).catch(err => {
                     console.log(err)
                 })
-
-            setwareTopics(wareName)
-            setwareCommit(wareName)
         }
     }
-}
-
-
-const setwareCommit = (wareName) => {
-    let commitDate = {}
-    let commitOptions = {
-        uri: `https://api.github.com/repos/RSS1102/${wareName}/commits?per_page=1`,
-        method: 'GET',
-        port: 443,
-        headers: {
-            'User-Agent': 'RSS1102',
-            'Authorization': Authorization,
-        }
-    }
-    reqs(commitOptions)
-        .then(res => {
-            let usersCommit = JSON.parse(res)[0]
-                // 判断authors与committer是否存在   
-            let commitAothor = {}
-            usersCommit.author ? commitAothor = usersCommit.author : (usersCommit.committer ? commitAothor = usersCommit.committer : '')
-            usersCommit = {
-                commit_message: usersCommit.commit.message,
-                commit_name: usersCommit.commit.author.name,
-                commit_avatar: commitAothor.avatar_url,
-                commit_html: commitAothor.html_url,
-                commit_date: usersCommit.commit.committer.date,
-            }
-            commitDate = {
-                name: wareName,
-                commit: usersCommit,
-            }
-            wareCommit.upsert(commitDate)
-                .then(date => {
-                    // console.log(date)
-                }).catch(err => {
-                    console.log(err)
-                })
-        })
-}
-const setwareTopics = (wareName) => {
-    let usersTopics = {}
-    let topicsOptions = {
-        uri: `https://api.github.com/repos/RSS1102/${wareName}/languages`,
-        method: 'GET',
-        port: 443,
-        headers: {
-            'User-Agent': 'RSS1102',
-            'Authorization': Authorization,
-        }
-    }
-    reqs(topicsOptions)
-        .then(res => {
-            usersTopics = JSON.parse(res)
-            let topicsDate = {
-                name: wareName,
-                topics: usersTopics,
-            }
-            wareTopics.upsert(topicsDate)
-                .then(date => {
-                    // console.log(date)
-                }).catch(err => {
-                    console.log(err)
-                })
-        })
-
 }
