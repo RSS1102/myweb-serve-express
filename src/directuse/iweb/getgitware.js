@@ -70,9 +70,9 @@ module.exports = {
                 forks_url: userku[i].forks_url,
                 stargazers_count: userku[i].stargazers_count,
                 fork: userku[i].fork,
-                warelanguage: usersLanguage,
-                warecommit: usersCommit,
-                waretopics: Object.assign({}, userku[i].topics),
+                ware_languages: usersLanguage,
+                ware_commits: usersCommit,
+                ware_topics: Object.assign({}, userku[i].topics),
             }
             console.log("userWarehouse", userWarehouse)
             await wareHouse.upsert(userWarehouse)

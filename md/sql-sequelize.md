@@ -111,5 +111,9 @@
          }
      ```
 
-     
+### 使用“sequelize ” 遇到的问题：
+
+1. Error: Unknown column 'ware_commits' in 'field list'（ code: 'ER_BAD_FIELD_ERROR',）
+   - 注意大小写，字段是否一致正确。
+   - 注意是否有空格（我就犯了这个错误）
 

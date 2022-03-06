@@ -32,17 +32,17 @@ const wareHouse = db.define(
             field: 'stargazers_count', //点赞数量
             type: DataTypes.INTEGER,
         },
-        waretopic: {
-            field: 'waretopic', //标签
-            type: DataTypes.JSON,
+        ware_topics: {
+            field: 'ware_topics', //标签
+            type: DataTypes.JSONB,
         },
-        warelanguage: {
-            field: 'warelanguage', //语言
-            type: DataTypes.JSON,
+        ware_languages: {
+            field: 'ware_languages', //语言
+            type: DataTypes.JSONB,
         },
-        warecommit: {
-            field: 'warecommit', //commit
-            type: DataTypes.JSON,
+        ware_commits: {
+            field: 'ware_commits', //commit
+            type: DataTypes.JSONB,
         },
 
         updatedAt: {
@@ -55,7 +55,7 @@ const wareHouse = db.define(
         },
 
     }, {
-        timestamps: true, //取消自动添加createdAt字段
+        timestamps: true, //取消自动添加createdAt,updatedAt字段
     }
 )
 module.exports = {

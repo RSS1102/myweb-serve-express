@@ -22,5 +22,17 @@ app.get('/', async(req, res) => {
 })
 
 app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
-})
+        console.log(`Example app listening at http://localhost:${port}`)
+    })
+    // let userWarehouse = {
+    //     name: "123",
+    //     ware_commits: { 'name': '0', 'issys': '1', }
+
+// }
+// const { wareHouse } = require('./sql/iweb/product');
+// wareHouse.upsert(userWarehouse)
+//     .then(date => {
+//         console.log("date", date)
+//     }).catch(err => {
+//         console.log(err)
+//     })
