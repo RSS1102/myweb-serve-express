@@ -8,6 +8,6 @@ const githubList = require('../controller/iweb/product')
 router.get('/api/blogs/getmenu', blogs.getMenu)
 router.post('/api/blogs/setmenu', blogs.setMenu)
     //getGithubList
-router.get('/api/blogs/getgithublist', githubList.getGithubList)
+router.get('/api/product/getgithublist', githubList.getGithubList)
 
 module.exports = router

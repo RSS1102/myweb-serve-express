@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const port = 3000
+const port = 3003
     /**
      * 导入路由
      * 解析req.body
@@ -22,17 +22,5 @@ app.get('/', async(req, res) => {
 })
 
 app.listen(port, () => {
-        console.log(`Example app listening at http://localhost:${port}`)
-    })
-    // let userWarehouse = {
-    //     name: "123",
-    //     ware_commits: { 'name': '0', 'issys': '1', }
-
-// }
-// const { wareHouse } = require('./sql/iweb/product');
-// wareHouse.upsert(userWarehouse)
-//     .then(date => {
-//         console.log("date", date)
-//     }).catch(err => {
-//         console.log(err)
-//     })
+    console.log(`Example app listening at http://localhost:${port}`)
+})

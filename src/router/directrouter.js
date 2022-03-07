@@ -1,9 +1,6 @@
 const getGitWare = require('../directuse/iweb/getgitware')
 direct = () => {
-    // let timeer = 100 * 60 * 60
-    // setTimeout(() => {
-    getGitWare.getware()
-        // }, timeer)
+    // getGitWare.getware()
 }
 module.exports = {
     direct

@@ -11,7 +11,8 @@ module.exports = {
             let nav = await db.query(`select content,text from blogs where title="${i.title}"`, { type: QueryTypes.SELECT });
             // [tit] 属性名用[]包起来才能用变量
             let obj = {
-                [tit]: nav
+                title: tit,
+                nav: nav
             }
             blogs.push(obj)
         }

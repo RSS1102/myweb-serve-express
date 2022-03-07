@@ -1,5 +1,5 @@
 const reqs = require('request-promise');
-const { Authorization } = require('../../../util/git')
+const { Authorization } = require('../../../util/config')
 const { wareHouse } = require('../../sql/iweb/product');
 module.exports = {
     async getware() {
