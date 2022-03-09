@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/js
 // test
 app.get('/', async(req, res) => {
 
-    res.send('进入后端......')
+    // res.send('进入后端......')
 })
 
 app.listen(port, () => {
