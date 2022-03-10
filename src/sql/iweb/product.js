@@ -24,8 +24,8 @@ const wareHouse = db.define(
             type: DataTypes.BOOLEAN,
 
         },
-        forks_url: {
-            field: 'forks_url', // fork地址
+        homepage: {
+            field: 'homepage', // homepage地址
             type: DataTypes.STRING
         },
         stargazers_count: {

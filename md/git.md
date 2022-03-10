@@ -41,7 +41,7 @@
    | https://api.github.com/repos/RSS1102/wxapp--forum/commits?per_page=1 |
    | 获取readme                                                   |
    | https://api.github.com/repos/RSS1102/punch_card/readme       |
-   | 获取topics                                                   |
+   | 获取用户的所有仓库                                           |
    |                                                              |
    | 获取语言                                                     |
    | https://api.github.com/repos/RSS1102/uni-socket/languages    |

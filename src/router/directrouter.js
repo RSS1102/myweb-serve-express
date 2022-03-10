@@ -1,6 +1,6 @@
 const getGitWare = require('../directuse/iweb/getgitware')
 direct = () => {
-    // getGitWare.getware()
+    getGitWare.getware()
 }
 module.exports = {
     direct

@@ -67,7 +67,7 @@ module.exports = {
                 name: userku[i].name,
                 description: userku[i].description,
                 url: userku[i].url,
-                forks_url: userku[i].forks_url,
+                homepage: userku[i].homepage,
                 stargazers_count: userku[i].stargazers_count,
                 fork: userku[i].fork,
                 ware_languages: usersLanguage,
