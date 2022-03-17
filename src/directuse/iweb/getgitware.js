@@ -66,7 +66,7 @@ module.exports = {
             let userWarehouse = {
                 name: userku[i].name,
                 description: userku[i].description,
-                url: userku[i].url,
+                url: userku[i].html_url,
                 homepage: userku[i].homepage,
                 stargazers_count: userku[i].stargazers_count,
                 fork: userku[i].fork,

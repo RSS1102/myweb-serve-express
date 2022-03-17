@@ -42,7 +42,7 @@
    | 获取readme                                                   |
    | https://api.github.com/repos/RSS1102/punch_card/readme       |
    | 获取用户的所有仓库                                           |
-   |                                                              |
+   | https://api.github.com/users/RSS1102/repos                   |
    | 获取语言                                                     |
    | https://api.github.com/repos/RSS1102/uni-socket/languages    |
 

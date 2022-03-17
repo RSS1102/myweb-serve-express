@@ -6,10 +6,12 @@ const port = 3003
      * 解析req.body
      * 使用同步request请求
      */
+
 const router = require('./router/index')
 const bodyParser = require('body-parser')
 const direct = require('./router/directrouter')
 direct.direct()
+    // var assert = require('assert');
 
 app.use(router)
 app.use(bodyParser.json())
@@ -18,9 +20,10 @@ app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/js
 // test
 app.get('/', async(req, res) => {
 
-    // res.send('进入后端......')
+    res.send('进入后端......')
 })
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
+        // console.log(`Example app listening at http://0.0.0.0:${port}`)
 })
