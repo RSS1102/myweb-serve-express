@@ -3,11 +3,12 @@
   const Authorization = a + b
       // sql数据库地址
 
-  const sql = {
-      sqlAddress: 'localhost',
-      db: 'web',
-      user: 'root',
-      pass: 'root',
+
+  const webtest = {
+      sqlAddress: '101.34.251.59',
+      db: 'webtest',
+      user: 'webtest',
+      pass: 'webtest',
   }
   const sqlweb = {
       sqlAddress: '101.34.251.59',
@@ -16,7 +17,13 @@
       pass: 'RSS13470936725',
   }
 
-  let sqlAddress = sqlweb
+  const sql = {
+      sqlAddress: 'localhost',
+      db: 'web',
+      user: 'root',
+      pass: 'root',
+  }
+  let sqlAddress = webtest
   module.exports = {
       Authorization,
       sqlAddress

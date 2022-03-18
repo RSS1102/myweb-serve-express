@@ -15,10 +15,10 @@
 3. https://segmentfault.com/a/1190000015274463 (关于locahost遇到报错解决)
 
 4. 基础连接格式 const sequelize = new Sequelize('db', 'user', 'passwrold', {
-  host: 'localhost',
-  port: 'port',
-  dialect: 'mysql'
-  });
+    host: 'localhost',
+    port: 'port',
+    dialect: 'mysql'
+    });
 
 5. 直接使用sql语句查询：
 
@@ -110,6 +110,41 @@
                  })
          }
      ```
+
+10. 使用[findAll](https://sequelize.org/v6/manual/model-querying-basics.html#simple-select-queries)查询数据。
+
+    ``` js
+    // 1. 从数据库中读取整个表2.您可以使用以下attributes选项：
+    const users = await User.findAll();
+    //SELECT * FROM ...
+    Model.findAll({
+      attributes: ['foo', 'bar']
+    });
+    //SELECT foo, bar FROM ...为 SELECT 查询指定属性:要仅选择某些属性
+    Model.findAll({
+      attributes: [
+        'foo',
+        [sequelize.fn('COUNT', sequelize.col('hats')), 'n_hats'],
+        'bar'
+      ]
+    });
+    //SELECT foo, COUNT(hats) AS n_hats, bar FROM ...你可以sequelize.fn用来做聚合：
+    
+    ```
+
+11. 使用[findAll.WHERE ](https://sequelize.org/v6/manual/model-querying-basics.html#simple-select-queries)  条件查询数据。
+
+    ``` js
+    //基础
+    Post.findAll({
+      where: {
+        authorId: 2
+      }
+    });
+    // SELECT * FROM post WHERE authorId = 2;
+    ```
+
+    
 
 ### 使用“sequelize ” 遇到的问题：
 

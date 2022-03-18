@@ -12,12 +12,11 @@ const bodyParser = require('body-parser')
 const direct = require('./router/directrouter')
 direct.direct()
     // var assert = require('assert');
-
-app.use(router)
+    // 这里“bodyParser”中间件一定要配置在路由之前
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/json// for parsing application/x-www-form-urlencoded
-
-// test
+app.use(router)
+    // test
 app.get('/', async(req, res) => {
 
     res.send('进入后端......')
