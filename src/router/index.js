@@ -5,9 +5,9 @@ const blogs = require('../controller/iweb/blogs')
 const githubList = require('../controller/iweb/product')
 
 // blogs
-router.get('/api/blogs/getmenu', blogs.getMenu)
-router.post('/api/blogs/setmenu', blogs.setMenu)
-router.post('/api/blogs/getmarkdown', blogs.getMarkDown)
+router.get('/api/blogs/getblogmenu', blogs.getBlogMenu)
+router.post('/api/blogs/setblogmenu', blogs.setBlogMenu)
+router.post('/api/blogs/blogcontent', blogs.getBlogContent)
 
 //getGithubList
 router.get('/api/product/getgithublist', githubList.getGithubList)

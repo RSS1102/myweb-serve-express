@@ -16,8 +16,8 @@ const Blogs = db.define(
                 field: 'content',
                 type: DataTypes.STRING
             },
-            text: {
-                field: 'text',
+            navindex: {
+                field: 'navindex',
                 type: DataTypes.STRING,
 
             },
