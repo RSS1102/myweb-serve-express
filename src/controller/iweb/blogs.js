@@ -1,6 +1,6 @@
-const { db } = require('../../sql/iweb/db');
+const { db } = require('../../sql/web/db');
 const { QueryTypes } = require('sequelize');
-const { Blogs } = require('../../sql/iweb/blogs');
+const { Blogs } = require('../../sql/web/blogs');
 const qs = require('qs')
 module.exports = {
     async getBlogMenu(req, res) {
@@ -27,17 +27,6 @@ module.exports = {
         res.send(blogs)
     },
 
-    async setBlogMenu(req, res) {
-        let body = req.body
-        await Blogs.create(body)
-            .then(date => {
-                // console.log(date)
-                res.send(date.dataValues)
-            }).catch(err => {
-                console.log(err)
-            })
-        res.send("success")
-    },
 
     async getBlogContent(req, res) {
         // 查询blogs并格式化数据

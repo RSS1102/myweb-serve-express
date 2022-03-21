@@ -8,6 +8,11 @@ const Blogs = db.define(
             //     autoIncrement: true, // 对postgres来说会自动转为 SERIAL
             //     primaryKey: true
             // },
+            navindex: {
+                field: 'navindex',
+                type: DataTypes.STRING,
+
+            },
             title: {
                 field: 'title', // 字段名
                 type: DataTypes.STRING, // 类型
@@ -16,14 +21,25 @@ const Blogs = db.define(
                 field: 'content',
                 type: DataTypes.STRING
             },
-            navindex: {
-                field: 'navindex',
+            updatedAt: {
+                field: 'updatedAt',
+                type: DataTypes.TIME,
+            },
+            createdAt: {
+                field: 'createdAt',
+                type: DataTypes.TIME,
+            },
+            visited: {
+                field: 'updatedAt',
+                type: DataTypes.INTEGER,
+            },
+            intro: {
+                field: 'createdAt',
                 type: DataTypes.STRING,
-
             },
 
         }, {
-            timestamps: false, //取消自动添加createdAt字段
+            timestamps: true, //自动添加createdAt,updatedAt字段
         }
     )
     /**

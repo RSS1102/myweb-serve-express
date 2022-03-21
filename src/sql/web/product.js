@@ -55,7 +55,7 @@ const wareHouse = db.define(
         },
 
     }, {
-        timestamps: true, //取消自动添加createdAt,updatedAt字段
+        timestamps: true, //自动添加createdAt,updatedAt字段
     }
 )
 module.exports = {

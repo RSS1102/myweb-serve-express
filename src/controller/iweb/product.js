@@ -1,4 +1,4 @@
-const { wareHouse } = require('../../sql/iweb/product');
+const { wareHouse } = require('../../sql/web/product');
 const qs = require('qs')
 module.exports = {
     getGithubList(req, res) {
