@@ -1,4 +1,4 @@
-const { db } = require('../../sql/web/db');
+const { db } = require('../../sql/db/db');
 const { QueryTypes } = require('sequelize');
 const { Blogs } = require('../../sql/web/blogs');
 const qs = require('qs')

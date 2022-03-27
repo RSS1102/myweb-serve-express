@@ -1,4 +1,4 @@
-const { db } = require('./db');
+const { db } = require('../db/db');
 const { DataTypes } = require('sequelize');
 // 用户的公共库的基本信息
 const wareHouse = db.define(

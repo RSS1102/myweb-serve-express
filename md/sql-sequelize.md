@@ -6,11 +6,13 @@
 
 2. ##### 连接sql数据遇到的问题：
 
+   1. sql的表名结尾要以"s"结尾。
+
 ### 使用“sequelize ”的连接方式连接数据库
 
-1. [中文文档： ](https://github.com/demopark/sequelize-docs-Zh-CN)  
+1. [中文文档 ](https://github.com/demopark/sequelize-docs-Zh-CN)  
 
-2. Model 的定义、使用与Model类的API（[API](https://itbilu.com/nodejs/npm/V1PExztfb.html#api-upsert)）
+2. Model 的定义、使用与Model类的API（[中文文档API](https://itbilu.com/nodejs/npm/V1PExztfb.html#api-upsert)）
 
 3. https://segmentfault.com/a/1190000015274463 (关于locahost遇到报错解决)
 
@@ -111,12 +113,15 @@
          }
      ```
 
-10. 使用[findAll](https://sequelize.org/v6/manual/model-querying-basics.html#simple-select-queries)查询数据。
+10. 使用[findAll](https://sequelize.org/v6/manual/model-querying-basics.html#simple-select-queries)查询数据（默认查询全部、按字段查询、聚合查询）。
 
     ``` js
-    // 1. 从数据库中读取整个表2.您可以使用以下attributes选项：
+    // 1. 从数据库中读取整个表、2.可以使用attributes选项进行查询指定字段、3.可以使用 where按条件查找。
+    //1. 从数据库中读取整个表
     const users = await User.findAll();
     //SELECT * FROM ...
+    
+    //2.可以使用attributes选项进行查询指定字段
     Model.findAll({
       attributes: ['foo', 'bar']
     });
@@ -130,18 +135,53 @@
     });
     //SELECT foo, COUNT(hats) AS n_hats, bar FROM ...你可以sequelize.fn用来做聚合：
     
-    ```
-
-11. 使用[findAll.WHERE ](https://sequelize.org/v6/manual/model-querying-basics.html#simple-select-queries)  条件查询数据。
-
-    ``` js
-    //基础
+    //3.使用[findAll.WHERE ](https://sequelize.org/v6/manual/model-querying-basics.html#simple-select-queries) 按**条件**查询数据。
     Post.findAll({
       where: {
         authorId: 2
       }
     });
     // SELECT * FROM post WHERE authorId = 2;
+    ```
+
+
+11. 使用[destroy](https://sequelize.org/v6/class/src/model.js~Model.html#static-method-destroy) 删除数据。
+
+    ``` js
+    //1.使用where按照条件删除数据。
+    Model.destroy({
+     where: {
+        authorId: 2
+      }
+    });
+    
+    ```
+
+12. 使用[update](https://sequelize.org/v6/class/src/dialects/abstract/query-interface.js~QueryInterface.html#instance-method-bulkUpdate)更改（更新）数据。
+
+    ```js
+     await BlogNavs.update(
+    { navindex: body.navindex },
+     {
+        where: {
+            id: body.id
+        }
+    })
+    .then(date => {
+        console.log(date)
+        res.send(date)
+    }).catch(err => {
+        console.log(err)
+    })
+    ```
+
+    参数
+
+    ``` 
+    update(values, options) -> Promise.<Array.<affectedCount, affectedRows>>
+    values	Object	更新数据
+    options	Object	条件
+    options.where	Object	筛选条件
     ```
 
     

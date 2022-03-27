@@ -9,7 +9,7 @@ const port = 3003
 
 const router = require('./router/index')
 const bodyParser = require('body-parser')
-const direct = require('./router/directrouter')
+const direct = require('./directuse/directrouter')
 direct.direct()
     // var assert = require('assert');
     // 这里“bodyParser”中间件一定要配置在路由之前

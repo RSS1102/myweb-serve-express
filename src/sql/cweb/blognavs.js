@@ -1,8 +1,7 @@
-const { db } = require('./db');
+const { db } = require('../db/db');
 const { DataTypes } = require('sequelize');
 const BlogNavs = db.define(
-        'blogsnav', {
-
+        'blognavs', {
             navindex: {
                 field: 'navindex',
                 type: DataTypes.STRING,

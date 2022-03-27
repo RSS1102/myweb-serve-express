@@ -1,4 +1,4 @@
-const getGitWare = require('../directuse/iweb/getgitware')
+const getGitWare = require('./iweb/getgitware')
 direct = () => {
     // getGitWare.getware()
 }
