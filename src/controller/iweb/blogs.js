@@ -1,6 +1,6 @@
 const { db } = require('../../sql/db/db');
 const { QueryTypes } = require('sequelize');
-const { Blogs } = require('../../sql/web/blogs');
+const { Blogs } = require('../../sql/iweb/blogs');
 const qs = require('qs')
 module.exports = {
     async getBlogMenu(req, res) {

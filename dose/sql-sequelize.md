@@ -184,6 +184,21 @@
     options.where	Object	筛选条件
     ```
 
+13. 使用[findAndCountAll](https://www.jianshu.com/p/6ff6aec4fb6e)分页查找：
+
+
+    1. where 查询条件（不属于分页范畴）
+    2. offset:需要忽略多少条数据。
+    3. limit每次返回几条数据。
+
+    ``` js
+    await Blogs.findAndCountAll({
+                where: { navindex: navindex },
+                offset: offset,
+                limit: limit,
+            })
+    ```
+
     
 
 ### 使用“sequelize ” 遇到的问题：

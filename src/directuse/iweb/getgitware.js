@@ -1,6 +1,6 @@
 const reqs = require('request-promise');
 const { Authorization } = require('../../util/config')
-const { wareHouse } = require('../../sql/web/product');
+const { wareHouse } = require('../../sql/iweb/product');
 module.exports = {
     async getware() {
         // 数据库
