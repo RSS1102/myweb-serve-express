@@ -1,18 +1,19 @@
 const { Blogs } = require('../../sql/iweb/blogs');
 const qs = require('qs')
+    /**
+     * 分页、按条件获取文章
+     */
     //条件-分页查找
 module.exports = {
     async getBlogsPaging(req, res) {
+        console.log("req.body", req.body)
         let { offset, limit, navindex } = req.body
-        console.log(body)
-        await Blogs.findAndCountAll({
+        let { count, rows } = await Blogs.findAndCountAll({
             where: { navindex: navindex },
-            offset: offset,
-            limit: limit,
-        }).then(data => {
-            res.send(data)
-        }).catch(err => {
-
+            offset: parseInt(offset),
+            limit: parseInt(limit),
         })
+        let data = { count: count, rows: rows }
+        res.send(data)
     }
 }

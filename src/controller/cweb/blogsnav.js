@@ -1,6 +1,11 @@
 const { BlogNavs } = require('../../sql/cweb/blognavs');
 const qs = require('qs')
-
+    /**
+     * 获取navindex
+     * 添加navindex
+     * 删除navindex
+     * 更新navindex
+     */
 module.exports = {
     async getBlogNav(req, res) {
         await BlogNavs.findAll({ attributes: ['navindex', 'id'] })
