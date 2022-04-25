@@ -6,7 +6,6 @@ const port = 3003
      * 解析req.body
      * 使用同步request请求
      */
-
 const router = require('./router/index')
 const bodyParser = require('body-parser')
 const direct = require('./directuse/directrouter')

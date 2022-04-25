@@ -1,5 +1,16 @@
 const express = require("express");
 const router = express.Router()
+const multer = require('multer')
+const storage = multer.diskStorage({
+    // 必须是已存在的路径'files'
+    destination: function(req, file, cb) {
+        cb(null, 'files')
+    },
+    filename: function(req, file, cb) {
+        cb(null, file.originalname)
+    }
+})
+const upload = multer({ storage: storage })
     // 引入
 const iBlogs = require('../controller/iweb/blogs')
 const cBlogsNav = require('../controller/cweb/blogsnav')
@@ -14,11 +25,13 @@ router.post('/api/blogs/blogcontent', iBlogs.getBlogContent)
 router.get('/api/product/getgithublist', githubList.getGithubList)
 
 // ******************************cweb************************/
-// blogs
+// blogsnav
 router.get('/cweb/cBlogsNav/getBlogNav', cBlogsNav.getBlogNav)
 router.post('/cweb/cBlogsNav/addBlogNav', cBlogsNav.addBlogNav)
 router.post('/cweb/cBlogsNav/delBlogNav', cBlogsNav.delBlogNav)
 router.post('/cweb/cBlogsNav/upBlogMenu', cBlogsNav.upBlogMenu)
+    // blogs
 router.post('/cweb/cBlogs/getBlogsPaging', cBlogs.getBlogsPaging)
+router.post('/cweb/cBlogs/upLoadFile', upload.single('file'), cBlogs.upLoadFile)
 
 module.exports = router
