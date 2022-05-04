@@ -33,9 +33,7 @@
 
   1. 先连接数据库
 
-  2. 创建数据模型实例
-
-  3. 使用create添加数据。
+  8. 创建数据模型实例
 
      * ###### 数据库要设定id，为主键，为自增，(sequelize会自动添加id到数据库)
 
@@ -99,6 +97,8 @@
          Blogs
      }
      ```
+
+     9. 使用create添加数据。
 
      ``` js
       let body = {"title":"1",content："1",text:"1"}
@@ -190,7 +190,7 @@
     1. where 查询条件（不属于分页范畴）
     2. offset:需要忽略多少条数据。
     3. limit每次返回几条数据。
-
+    
     ``` js
     await Blogs.findAndCountAll({
                 where: { navindex: navindex },
@@ -199,7 +199,8 @@
             })
     ```
 
-    
+
+​    
 
 ### 使用“sequelize ” 遇到的问题：
 

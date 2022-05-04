@@ -4,7 +4,7 @@ const multer = require('multer')
 const storage = multer.diskStorage({
     // 必须是已存在的路径'files'
     destination: function(req, file, cb) {
-        cb(null, 'files')
+        cb(null, 'src/files')
     },
     filename: function(req, file, cb) {
         cb(null, file.originalname)
@@ -31,7 +31,9 @@ router.post('/cweb/cBlogsNav/addBlogNav', cBlogsNav.addBlogNav)
 router.post('/cweb/cBlogsNav/delBlogNav', cBlogsNav.delBlogNav)
 router.post('/cweb/cBlogsNav/upBlogMenu', cBlogsNav.upBlogMenu)
     // blogs
-router.post('/cweb/cBlogs/getBlogsPaging', cBlogs.getBlogsPaging)
+router.post('/cweb/cBlogs/saveBlogs', cBlogs.saveBlogs)
+router.post('/cweb/cBlogs/getBlogs', cBlogs.getBlogs)
 router.post('/cweb/cBlogs/upLoadFile', upload.single('file'), cBlogs.upLoadFile)
+    // router.get('/cweb/cBlogs/getImgFiles', cBlogs.getImgFiles)
 
 module.exports = router

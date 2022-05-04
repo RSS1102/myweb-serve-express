@@ -8,7 +8,7 @@ const qs = require('qs')
      */
 module.exports = {
     async getBlogNav(req, res) {
-        await BlogNavs.findAll({ attributes: ['navindex', 'id'] })
+        await BlogNavs.findAll({ attributes: ['blogNav', 'id'] })
             .then(date => {
                 console.log("date", date)
                 res.send(date)
@@ -20,16 +20,16 @@ module.exports = {
     // 这里要判断是否已经存在，如果存在则不能添加
     async addBlogNav(req, res) {
         // let body = req.body
-        const { navindex } = req.body
+        const { blogNav } = req.body
         await BlogNavs.findAll({
-                where: { navindex: navindex }
+                where: { blogNav: blogNav }
             })
             .then(data => {
                 let objkeys = Object.keys(data[0].dataValues)
                 if (objkeys.length) {
                     res.send({
                         status: 304,
-                        msg: "重复的navindex"
+                        msg: "重复的blogNav"
                     })
                     return
                 }
@@ -37,7 +37,7 @@ module.exports = {
                 console.log(err)
             })
 
-        await BlogNavs.create({ navindex: navindex })
+        await BlogNavs.create({ blogNav: blogNav })
             .then(date => {
                 console.log(date)
                 res.send(date)
@@ -76,7 +76,7 @@ module.exports = {
             console.log(ID)
         }
         if (ID === "id") {
-            await BlogNavs.update({ navindex: body.navindex }, {
+            await BlogNavs.update({ blogNav: body.blogNav }, {
                     where: {
                         id: body.id
                     }

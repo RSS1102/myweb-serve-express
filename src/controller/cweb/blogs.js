@@ -1,15 +1,34 @@
 const { Blogs } = require('../../sql/iweb/blogs');
 
-const fs = require('fs')
+
+module.exports = {
+    /**
+     * 文章保存
+     * @param {article} req 
+     * @param {code} res 
+     */
+    async saveBlogs(req, res) {
+        console.log("req.body", req.body)
+        Blogs.create(req.body).then(res => {
+
+        }).catch(err => {
+            res.send({
+                code: 500,
+                status: err
+            })
+        })
+
+    },
+
+
     /**
      * 分页、按条件获取文章
      */
-    //条件-分页查找
-module.exports = {
-    async getBlogsPaging(req, res) {
+    async getBlogs(req, res) {
         console.log("req.body", req.body)
-        let { offset, limit, navindex } = req.body
-        if (navindex == "") {
+        let { offset, limit, blogNav } = req.body
+        if (!blogNav) {
+            console.log("空")
             let { count, rows } = await Blogs.findAndCountAll({
                 offset: parseInt(offset),
                 limit: parseInt(limit),
@@ -17,8 +36,9 @@ module.exports = {
             let data = { count: count, rows: rows }
             res.send(data)
         } else {
+            console.log("非空")
             let { count, rows } = await Blogs.findAndCountAll({
-                where: { navindex: navindex },
+                where: { blogNav: blogNav },
                 offset: parseInt(offset),
                 limit: parseInt(limit),
             })
@@ -30,14 +50,11 @@ module.exports = {
     },
     /**
      * 获取到上传文件信息
-     * "fs"操作改名，更改后缀名
-     *如果重名则直接返回文件名，不接受文件
      * @param {file} req 
-     * @param {image} res 
+     * @param {location} res 
      */
     async upLoadFile(req, res) {
         console.log(req.file)
-        res.send(req.file)
-    }
-
+        res.send({ location: req.file.filename })
+    },
 }

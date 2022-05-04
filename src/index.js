@@ -15,10 +15,13 @@ direct.direct()
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/json// for parsing application/x-www-form-urlencoded
 app.use(router)
+app.stack
     // test
-app.get('/', async(req, res) => {
+let path = require('path')
+app.use('/files', express.static(path.join(__dirname, 'files')))
 
-    res.send('进入后端......')
+app.get('/', async(req, res) => {
+    res.send("express")
 })
 
 app.listen(port, () => {
