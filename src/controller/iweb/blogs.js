@@ -22,20 +22,20 @@ module.exports = {
         res.send(BlogMenuList)
     },
 
-
+    // 查询blogContent
     async getBlogContent(req, res) {
-        // 查询blogs并格式化数据
-        const blogNav = req.body.blogNav
-        const title = req.body.title
-        console.log(blogNav, title)
+
+        let blogNav = req.body.blogNav
+        let blogTitle = req.body.blogTitle
+        console.log(blogNav, blogTitle)
         let Content = await Blogs.findAll({
-            attributes: ['content'],
+            attributes: ['blogContent'],
             where: {
                 blogNav: blogNav,
-                title: title
+                blogTitle: blogTitle
             }
         });
-        res.send(Content)
+        res.send(Content[0])
     },
 
 }
