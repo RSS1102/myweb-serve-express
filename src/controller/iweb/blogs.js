@@ -6,17 +6,19 @@ const qs = require('qs')
 module.exports = {
     async getBlogMenu(req, res) {
         const BlogMenu = await Blogs.findAll({
-            attributes: ['blogNav', 'blogTitle'],
+            attributes: ['blogNav', 'blogTitle', 'id'],
         });
         const BlogMenuList = Object.create(null);
         BlogMenu.forEach(({
             blogNav,
-            blogTitle
+            blogTitle,
+            id
         }) => {
             if (BlogMenuList[blogNav]) {
-                BlogMenuList[blogNav].push(blogTitle)
+                BlogMenuList[blogNav].push({ id, blogTitle })
+
             } else {
-                BlogMenuList[blogNav] = [blogTitle]
+                BlogMenuList[blogNav] = [{ id, blogTitle }]
             }
         })
         res.send(BlogMenuList)
@@ -24,15 +26,11 @@ module.exports = {
 
     // 查询blogContent
     async getBlogContent(req, res) {
-
-        let blogNav = req.body.blogNav
-        let blogTitle = req.body.blogTitle
-        console.log(blogNav, blogTitle)
+        console.log(res.body)
+        let id = req.body.id
         let Content = await Blogs.findAll({
-            attributes: ['blogContent'],
             where: {
-                blogNav: blogNav,
-                blogTitle: blogTitle
+                id: id
             }
         });
         res.send(Content[0])
