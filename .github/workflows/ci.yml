@@ -43,4 +43,3 @@ jobs:
           last_ssh: |
             cd  /www/wwwroot/express/dist/
             npm install
-            # pm2 start src/index.js --watch
