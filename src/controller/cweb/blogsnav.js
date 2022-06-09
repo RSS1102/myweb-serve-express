@@ -1,96 +1,106 @@
 const { BlogNavs } = require('../../sql/cweb/blognavs');
 const qs = require('qs')
-    /**
-     * 获取navindex
-     * 添加navindex
-     * 删除navindex
-     * 更新navindex
-     */
+/**
+ * 获取navindex
+ * 添加navindex
+ * 删除navindex
+ * 更新navindex
+ *  @returns{id: number, code: number,blogNav: string,}
+ */
 module.exports = {
-    async getBlogNav(req, res) {
+    async getBlogsNav(req, res) {
         await BlogNavs.findAll({ attributes: ['blogNav', 'id'] })
-            .then(date => {
-                console.log("date", date)
-                res.send(date)
+            .then(data => {
+                res.send(data)
             }).catch(err => {
                 console.log(err)
                 res.send("err")
             })
     },
     // 这里要判断是否已经存在，如果存在则不能添加
-    async addBlogNav(req, res) {
-        // let body = req.body
+    addBlogsNav(req, res) {
         const { blogNav } = req.body
-        await BlogNavs.findAll({
-                where: { blogNav: blogNav }
-            })
-            .then(data => {
-                let objkeys = Object.keys(data[0].dataValues)
-                if (objkeys.length) {
-                    res.send({
-                        status: 304,
-                        msg: "重复的blogNav"
+        BlogNavs.findAll({
+            where: { blogNav: blogNav }
+        }).then(data => {
+            console.log(data.length)
+            if (data.length > 0) {
+                res.send({
+                    code: 304,
+                    data: "重复的blogNav"
+                })
+            } else {
+                BlogNavs.create({ blogNav: blogNav })
+                    .then(data => {
+                        console.log("2")
+                        console.log("添加data", data)
+                        res.send({
+                            code: 200,
+                            msg: "添加成功" + data
+                        })
+                    }).catch(err => {
+                        console.log("22")
+                        console.log(err)
+                        res.send({
+                            code: 400,
+                            msg: "添加失败" + err
+                        })
                     })
-                    return
-                }
-            }).catch(err => {
-                console.log(err)
-            })
+            }
 
-        await BlogNavs.create({ blogNav: blogNav })
-            .then(date => {
-                console.log(date)
-                res.send(date)
-            }).catch(err => {
-                console.log(err)
+        }).catch(err => {
+            res.send({
+                code: 400,
+                msg: "添加失败" + err
             })
+        })
     },
 
-    async delBlogNav(req, res) {
+    async delBlogsNav(req, res) {
         // 这里应该按照id删除
-        let body = req.body
-        console.log(body)
-        if (Object.keys(body)[0] !== "id") {
-            res.send("err,只允许按照`id`删除,请上传id")
-            return
-        }
+        let { id } = req.body
+        console.log(id)
+        // if (Object.keys(body)[0] !== "id") {
+        //     res.send("err,只允许按照`id`删除,请上传id")
+        //     return
+        // }
         await BlogNavs.destroy({
-                where: body
-            })
-            .then(date => {
-                console.log(body)
-                console.log(date)
-                res.send(date)
+            where: { id: id }
+        })
+            .then(data => {
+                console.log(data)
+                res.send({
+                    code: 200,
+                    data: data
+                })
             }).catch(err => {
-                console.log(err)
+                res.send({
+                    code: 400,
+                    data: err
+                })
             })
     },
-    async upBlogMenu(req, res) {
+
+    editBlogsNav(req, res) {
         // 这里应该按照id更改
-        let body = req.body
-        let ObjectKeys = Object.keys(body)
-        let ID = ''
-        for (let i in ObjectKeys) {
-            console.log(i, ObjectKeys[i])
-            ObjectKeys[i] === "id" ? ID = ObjectKeys[i] : ""
-            console.log(ID)
-        }
-        if (ID === "id") {
-            await BlogNavs.update({ blogNav: body.blogNav }, {
-                    where: {
-                        id: body.id
-                    }
+        let { id, blogNav } = req.body
+        console.log(id, blogNav)
+        BlogNavs.update({ blogNav: blogNav }, {
+            where: {
+                id: id
+            }
+        })
+            .then(data => {
+
+                res.send({
+                    code: 200,
+                    data: data
                 })
-                .then(date => {
-                    console.log(date)
-                    res.send(date)
-                }).catch(err => {
-                    console.log(err)
+            }).catch(err => {
+                res.send({
+                    code: 400,
+                    data: err
                 })
-            return
-        } else {
-            console.log("请上传id")
-            res.send("err,只允许按照`id`更改,请上传id")
-        }
+            })
     },
 }
