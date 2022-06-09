@@ -3,11 +3,11 @@ on:
   #监听push操作
   push:
     branches:
-      # mian分支，你也可以改成其他分支
-      - main
+      # 你可以改成其他分支
+      - release
   pull_request:
     branches:
-      - main
+      - release
 jobs:
   # 任务ID
   build:

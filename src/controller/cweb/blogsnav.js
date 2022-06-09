@@ -60,10 +60,6 @@ module.exports = {
         // 这里应该按照id删除
         let { id } = req.body
         console.log(id)
-        // if (Object.keys(body)[0] !== "id") {
-        //     res.send("err,只允许按照`id`删除,请上传id")
-        //     return
-        // }
         await BlogNavs.destroy({
             where: { id: id }
         })
@@ -85,22 +81,40 @@ module.exports = {
         // 这里应该按照id更改
         let { id, blogNav } = req.body
         console.log(id, blogNav)
-        BlogNavs.update({ blogNav: blogNav }, {
-            where: {
-                id: id
-            }
-        })
-            .then(data => {
+        BlogNavs.findAll({
+            where: { blogNav: blogNav }
+        }).then(data => {
+            console.log(data.length)
+            if (data.length > 0) {
+                res.send({
+                    code: 304,
+                    data: "重复的blogNav"
+                })
+            } else {
+                BlogNavs.update({ blogNav: blogNav }, {
+                    where: {
+                        id: id
+                    }
+                })
+                    .then(data => {
 
-                res.send({
-                    code: 200,
-                    data: data
-                })
-            }).catch(err => {
-                res.send({
-                    code: 400,
-                    data: err
-                })
+                        res.send({
+                            code: 200,
+                            data: data
+                        })
+                    }).catch(err => {
+                        res.send({
+                            code: 400,
+                            data: err
+                        })
+                    })
+            }
+        }).catch(err => {
+            res.send({
+                code: 400,
+                data: err
             })
+        })
+
     },
 }
