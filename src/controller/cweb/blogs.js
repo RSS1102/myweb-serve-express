@@ -1,4 +1,7 @@
 const { Blogs } = require('../../sql/iweb/blogs');
+// 文件上传
+const multer = require('multer')
+const { uploadImage } = require("../../util/fileconfig")
 
 
 module.exports = {
@@ -51,10 +54,28 @@ module.exports = {
     /**
      * 获取到上传文件信息
      * @param {file} req 
-     * @param {location} res 
+     * @param {{err:{code:400,msg:"请上传正确的图片格式"},success:{location,code:200,msg:"图片上传成功"}}} res 
      */
-    async upLoadFile(req, res) {
-        console.log(req.file)
-        res.send({ location: req.file.filename })
+    upLoadFile(req, res) {
+        uploadImage.single('file')(req, res, function (err) {
+            console.log(req.file)
+            if (err instanceof multer.MulterError) {
+                // 发生错误
+                res.send({
+                    code: 400,
+                    msg: "请上传正确的图片格式1",
+                })
+            } else if (err) {
+                // 发生错误
+                res.send({
+                    code: 400,
+                    msg: "请上传正确的图片格式2",
+                })
+            } else {
+                // 一切都好
+                res.send({ location:req.file.filename, code: 200, msg: "图片上传成功" })
+            }
+        })
     },
+
 }

@@ -1,17 +1,5 @@
 const express = require("express");
 const router = express.Router()
-const multer = require('multer')
-// 文件上传
-const storage = multer.diskStorage({
-    // 必须是已存在的路径'files'
-    destination: function (req, file, cb) {
-        cb(null, 'src/files')
-    },
-    filename: function (req, file, cb) {
-        cb(null, file.originalname)
-    }
-})
-const upload = multer({ storage: storage })
 // 引入
 const iBlogs = require('../controller/iweb/blogs')
 const cBlogsNav = require('../controller/cweb/blogsnav')
@@ -34,7 +22,9 @@ router.post('/cweb/blogsNav/editBlogsNav', cBlogsNav.editBlogsNav)
 // blogs
 router.post('/cweb/cBlogs/saveBlogs', cBlogs.saveBlogs)
 router.post('/cweb/cBlogs/getBlogs', cBlogs.getBlogs)
-router.post('/cweb/cBlogs/upLoadFile', upload.single('file'), cBlogs.upLoadFile)
+// 上传图片
+// 当使用 Error handling的时候不应该在此处再次声明 uploadImage.single('file'),
+router.post('/cweb/cBlogs/upLoadFile', cBlogs.upLoadFile)
 // router.get('/cweb/cBlogs/getImgFiles', cBlogs.getImgFiles)
 
 module.exports = router
