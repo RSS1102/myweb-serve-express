@@ -7,17 +7,26 @@ const { uploadImage } = require("../../util/fileconfig")
 module.exports = {
     /**
      * 文章保存
-     * @param {article} req 
-     * @param {code} res 
+     * @param {blogContent: 文章内容,blogNav:文章分类,blogNavId:文章分类id,blogTitle:标题}
+     * @param {visitedNum:浏览人数,articleShow:是否展示文章,}
+     * @retrun {code} res 
      */
     async saveBlogs(req, res) {
         console.log("req.body", req.body)
-        Blogs.create(req.body).then(res => {
-
+        const body = req.body
+        let param = { ...body, visitedNum: 0, articleShow: true }
+        console.log("param", param)
+        Blogs.create(param).then(_res => {
+            // console.log("res", res)
+            res.send({
+                code: 200,
+                data: 'success',
+            })
         }).catch(err => {
+            console.log("err", err)
             res.send({
                 code: 500,
-                status: err
+                data: "error"
             })
         })
 
@@ -26,6 +35,8 @@ module.exports = {
 
     /**
      * 分页、按条件获取文章
+     * @param {offset:页码,limit:每页条数,blogNav:文章分类}
+     * @retrun {code} res
      */
     async getBlogs(req, res) {
         console.log("req.body", req.body)
@@ -73,7 +84,8 @@ module.exports = {
                 })
             } else {
                 // 一切都好
-                res.send({ location:req.file.filename, code: 200, msg: "图片上传成功" })
+                // res.send({ location:req.file.filename, code: 200, msg: "图片上传成功" })
+                res.send({ location: req.file.filename })
             }
         })
     },

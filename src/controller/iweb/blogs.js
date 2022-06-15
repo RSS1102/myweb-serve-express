@@ -4,6 +4,8 @@ const { Blogs } = require('../../sql/iweb/blogs');
 const { BlogNavs } = require('../../sql/cweb/blognavs');
 const qs = require('qs')
 module.exports = {
+
+    //查询分类和标题
     async getBlogMenu(req, res) {
         const BlogMenu = await Blogs.findAll({
             attributes: ['blogNav', 'blogTitle', 'id'],
@@ -23,8 +25,10 @@ module.exports = {
         })
         res.send(BlogMenuList)
     },
-
-    // 查询blogContent
+    /** 
+       * @param {标题} req 
+       * @param {文章内容} res 
+       */
     async getBlogContent(req, res) {
         console.log(res.body)
         let id = req.body.id

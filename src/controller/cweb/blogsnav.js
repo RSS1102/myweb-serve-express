@@ -97,7 +97,6 @@ module.exports = {
                     }
                 })
                     .then(data => {
-
                         res.send({
                             code: 200,
                             data: data
