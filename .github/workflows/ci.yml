@@ -34,12 +34,14 @@ jobs:
           connect_timeout: 10s
           local: "./*"
           remote: /www/wwwroot/express/dist/
-          # 在github 上操作上传文件(此处是上传压缩包)
-          scp: |
+          # 在github 上操作上传文件
+          first_ssh: |
             rm -rf  /www/wwwroot/dist
             mkdir -p /www/wwwroot/dist
-            ./*  => "/www/wwwroot/express/dist/"
           #在ssh上操作(上传完文件之后)
-          last_ssh: |
+          scp: |
+            ./*  => "/www/wwwroot/express/dist/"
             cd  /www/wwwroot/express/dist/
             npm install
+          last_ssh: |
+            pm2 restart all
