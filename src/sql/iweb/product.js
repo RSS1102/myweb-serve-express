@@ -46,11 +46,11 @@ const WareHouses = db.define('warehouses', {
 
     updatedAt: {
         field: 'updatedAt',
-        type: DataTypes.TIME,
+        type: DataTypes.DATE,
     },
     createdAt: {
         field: 'createdAt',
-        type: DataTypes.TIME,
+        type: DataTypes.DATE,
     },
 
 }, {

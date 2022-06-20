@@ -3,6 +3,8 @@ const { WareHouses } = require('../../sql/iweb/product');
 const { Logs } = require('../../sql/cweb/logs')
 module.exports = {
     getware() {
+        // 重新创建表
+        // WareHouses.sync({ force: true })
         let usersOptions = {
             url: 'https://api.github.com/users/RSS1102/repos',
             init: {
@@ -17,7 +19,9 @@ module.exports = {
                     // console.log(res)
                     return res.json()
                 }).then(res => {
+                  WareHouses.sync({ force: true }).then(() => {
                     resolve(res)
+                  })
                 })
         })
         pro.then(res => {
@@ -85,7 +89,7 @@ module.exports = {
                             doNum++;
                             console.log("doNum", userku.length, doNum)
                             if (doNum == userku.length) {
-                            
+
                                 Logs.create
                                     ({
                                         getGitWareDate: new Date(),
@@ -97,28 +101,25 @@ module.exports = {
                         }).catch(err => {
                             console.log('data', err)
                             Logs.create
-                            ({
-                                getGitWareDate: new Date(),
-                                getGitWareStatus: 'fail'
-                            }).then(data => {
-                                console.log("全部完成fail")
-                            })
+                                ({
+                                    getGitWareDate: new Date(),
+                                    getGitWareStatus: 'fail'
+                                }).then(data => {
+                                    console.log("全部完成fail")
+                                })
                         })
 
                 }).catch(err => {
                     console.log("promiseAllerr", err)
                     Logs.create
-                    ({
-                        getGitWareDate: new Date(),
-                        getGitWareStatus: 'fail'
-                    }).then(data => {
-                        console.log("全部完成fail")
-                    })
+                        ({
+                            getGitWareDate: new Date(),
+                            getGitWareStatus: 'fail'
+                        }).then(data => {
+                            console.log("全部完成fail")
+                        })
                 })
             }
-            // 返回状态
-
         })
-
     }
 }
