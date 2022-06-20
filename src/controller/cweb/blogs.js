@@ -89,5 +89,27 @@ module.exports = {
             }
         })
     },
+    /**
+     * 切换是否展示文章
+     * @param {id:文章id,articleShow:是否展示文章}
+     * @retrun {code} res
+     */
+    async changeArticleShow(req, res) {
+        const { id, articleShow } = req.body
+        Blogs.update(
+            { articleShow: articleShow },
+            { where: { id: id } })
+            .then(_res => {
+                res.send({
+                    code: 200,
+                    data: 'success',
+                })
+            }).catch(err => {
+                res.send({
+                    code: 500,
+                    data: "error"
+                })
+            })
+    }
 
 }

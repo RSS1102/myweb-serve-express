@@ -1,6 +1,5 @@
 const { db } = require('../db/db');
 const { DataTypes } = require('sequelize');
-// const { Blogs } = require('../../sql/iweb/blogs');
 const BlogNavs = db.define('blognavs', {
     blogNav: {
         field: 'blogNav',

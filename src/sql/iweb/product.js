@@ -1,7 +1,7 @@
 const { db } = require('../db/db');
 const { DataTypes } = require('sequelize');
 // 用户的公共库的基本信息
-const wareHouse = db.define('warehouse', {
+const WareHouses = db.define('warehouses', {
     name: {
         field: 'name', // 库名
         type: DataTypes.STRING,
@@ -33,15 +33,15 @@ const wareHouse = db.define('warehouse', {
     },
     ware_topics: {
         field: 'ware_topics', //标签
-        type: DataTypes.JSONB,
+        type: DataTypes.JSON,
     },
     ware_languages: {
         field: 'ware_languages', //语言
-        type: DataTypes.JSONB,
+        type: DataTypes.JSON,
     },
     ware_commits: {
         field: 'ware_commits', //commit
-        type: DataTypes.JSONB,
+        type: DataTypes.JSON,
     },
 
     updatedAt: {
@@ -55,8 +55,11 @@ const wareHouse = db.define('warehouse', {
 
 }, {
     timestamps: true, //自动添加createdAt,updatedAt字段
-})
+}
+)
+
+// WareHouses.sync({ force: true })
 module.exports = {
-    wareHouse,
+    WareHouses,
 
 }
