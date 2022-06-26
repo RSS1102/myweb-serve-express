@@ -1,7 +1,11 @@
 const { Logs } = require('../../sql/cweb/logs')
 module.exports = {
     getActionDone(req, res) {
-        Logs.findAll({})
+        // 查询最后7条数据
+        Logs.findAll({
+            order: [['id', 'DESC']],
+            limit: 7
+        })
             .then(data => {
                 res.send({
                     code: 200,
@@ -14,5 +18,5 @@ module.exports = {
                 })
             })
 
-    }
+    },
 }

@@ -11,8 +11,8 @@ const db = new Sequelize(sqlAddress.db, sqlAddress.user, sqlAddress.pass, {
         // collate: 'utf8mb4_unicode_ci',
         // supportBigNumbers: true,
         // bigNumberStrings: true,
-        dateStrings: true,
-        timezone: '+08:00',  
+        // dateStrings: true,
+        // timezone: '+08:00',  
     },
     pool: {
         max: 5,

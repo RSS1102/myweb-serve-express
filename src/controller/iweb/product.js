@@ -13,7 +13,7 @@ module.exports = {
                     let len = keysArr.length
                     for (let j = 0; j < len; j++) {
                         theData.ware_topicsTags.push(obj[keysArr[j]])
-                    }
+                    } 
                     let qsTags = qs.stringify({ topicstags: theData.ware_topicsTags }, { arrayFormat: 'indices' })
                     let qsCommits = qs.stringify(theData.ware_commits, { arrayFormat: 'repeat' })
                     let qsLanguages = qs.stringify(theData.ware_languages, { arrayFormat: 'repeat' })
