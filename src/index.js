@@ -33,8 +33,8 @@ app.use('/files', express.static(path.join(__dirname, 'files')))
 const https = require('https');
 const fs = require('fs')
 const options = {
-    key: fs.readFileSync(__dirname + "/ssl/rss1102.com.key", 'utf8'),
-    cert: fs.readFileSync(__dirname + '/ssl/rss1102.com_bundle.crt', 'utf8')
+    key: fs.readFileSync(__dirname + "/util/ssl/cokbbs.games.key", 'utf8'),
+    cert: fs.readFileSync(__dirname + '/util/ssl/cokbbs.games_bundle.crt', 'utf8'),
 };
 
 
@@ -44,6 +44,6 @@ app.get('/', async (req, res) => {
 })
 
 https.createServer(options, app).listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
+    console.log(`Example app listening at https://localhost:${port}`)
     // console.log(`Example app listening at http://0.0.0.0:${port}`)
 })
