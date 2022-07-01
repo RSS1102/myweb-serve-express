@@ -1,4 +1,4 @@
-const { Authorization } = require('../../util/config')
+const { Authorization } = require('../../util/config/git_auth_config')
 const { WareHouses } = require('../../sql/iweb/product');
 const { Logs } = require('../../sql/cweb/logs')
 module.exports = {

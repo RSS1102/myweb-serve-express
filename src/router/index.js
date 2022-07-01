@@ -22,6 +22,7 @@ router.post('/cweb/blogsNav/editBlogsNav', cBlogsNav.editBlogsNav)
 router.post('/cweb/cBlogs/saveBlogs', cBlogs.saveBlogs)
 router.post('/cweb/cBlogs/getBlogs', cBlogs.getBlogs)
 router.post('/cweb/cblogs/changeArticleShow', cBlogs.changeArticleShow)
+//action
 router.get('/cweb/cblogs/getOperationLogs', cOperationLogs.getActionDone)
 // 上传图片
 // 当使用 Error handling的时候不应该在此处再次声明 uploadImage.single('file'),

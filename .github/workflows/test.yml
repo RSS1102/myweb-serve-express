@@ -4,10 +4,10 @@ on:
   push:
     branches:
       # 你可以改成其他分支
-      - release
+      - main
   pull_request:
     branches:
-      - release
+      - main
 jobs:
   # 任务ID
   build:
@@ -33,15 +33,15 @@ jobs:
           port: 22
           connect_timeout: 10s
           local: "./*"
-          remote: /www/wwwroot/express/dist/
+          remote: /www/wwwroot/express/test/
           # 在github 上操作上传文件
           first_ssh: |
-            rm -rf  /www/wwwroot/dist
-            mkdir -p /www/wwwroot/dist
+            rm -rf  /www/wwwroot/test
+            mkdir -p /www/wwwroot/test
           #在ssh上操作(上传完文件之后)
           scp: |
-            ./*  => "/www/wwwroot/express/dist/"
-            cd  /www/wwwroot/express/dist/
+            ./*  => "/www/wwwroot/express/test/"
+            cd  /www/wwwroot/express/test/
             npm install
           last_ssh: |
-            pm2 restart all
+         #   pm2 restart all

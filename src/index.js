@@ -1,7 +1,7 @@
 const express = require('express')
 const cors = require('cors')
 const app = express()
-const port = 3003
+const { port } = require('./util/config/dev.js')
 // 跨域设置
 // app.all("*",function (req, res, next) {
 //     res.header('Access-Control-Allow-Origin', '*')

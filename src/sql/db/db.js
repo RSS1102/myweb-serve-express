@@ -1,6 +1,5 @@
 const { Sequelize } = require('sequelize');
-const { sqlAddress } = require('../../util/config')
-// const db = new Sequelize('jimmy', 'jimmy', 'RSS13470936725', {
+const { sqlAddress } = require('../../util/config/dev');
 const db = new Sequelize(sqlAddress.db, sqlAddress.user, sqlAddress.pass, {
     host: sqlAddress.sqlAddress,
     port: '3306',

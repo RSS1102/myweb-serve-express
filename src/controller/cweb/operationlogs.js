@@ -12,6 +12,7 @@ module.exports = {
                     data: data
                 })
             }).catch(err => {
+                console.log(err)
                 res.send({
                     code: 500,
                     data: '服务器错误'

@@ -11,12 +11,12 @@ const Logs = db.define('logs', {
         unique: true,
         comment: 'id',
     },
-    'getGitWareDate': {
-        field: 'getGitWareDate',
+    'gitWareDate': {
+        field: 'gitWareDate',
         type: DataTypes.DATE,
     },
-    'getGitWareStatus': {
-        field: 'getGitWareStatus',
+    'gitWareStatus': {
+        field: 'gitWareStatus',
         type: DataTypes.STRING,
     }
 })
