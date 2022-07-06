@@ -1,4 +1,4 @@
-const gitAuthorization = 'ghp_' + 'smtsSeYHs4IXOFllvq'+'P0wrKeoBcfMD2wp5jm'
+const Authorization = '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'
 module.exports = {
-    gitAuthorization
+    Authorization
 }
