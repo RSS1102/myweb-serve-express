@@ -1,10 +1,5 @@
-const { db } = require('../../sql/db/db');
-const { QueryTypes } = require('sequelize');
 const { Blogs } = require('../../sql/iweb/blogs');
-const { BlogNavs } = require('../../sql/cweb/blognavs');
-const qs = require('qs')
 module.exports = {
-
     //查询分类和标题
     async getBlogMenu(req, res) {
         const BlogMenu = await Blogs.findAll({

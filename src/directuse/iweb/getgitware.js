@@ -19,9 +19,9 @@ module.exports = {
                     // console.log(res)
                     return res.json()
                 }).then(res => {
-                  WareHouses.sync({ force: true }).then(() => {
-                    resolve(res)
-                  })
+                    WareHouses.sync({ force: true }).then(() => {
+                        resolve(res)
+                    })
                 })
         })
         pro.then(res => {

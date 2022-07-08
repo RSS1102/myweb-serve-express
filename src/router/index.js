@@ -2,16 +2,21 @@ const express = require("express");
 const router = express.Router()
 // 引入
 const iBlogs = require('../controller/iweb/blogs')
+const iMonitorLogs = require('../controller/iweb/monitorlogs')
 const cProduct = require('../controller/iweb/product')
 const cBlogsNav = require('../controller/cweb/blogsnav')
 const cBlogs = require('../controller/cweb/blogs')
 const cOperationLogs = require('../controller/cweb/operationlogs')
+
 //************************iweb******************************/
 // blogs
 router.get('/api/blogs/getblogmenu', iBlogs.getBlogMenu)
 router.post('/api/blogs/blogcontent', iBlogs.getBlogContent)
 //getGithubList
 router.get('/api/product/getgithublist', cProduct.getGithubList)
+//monitorlogs
+router.post('/api/monitorlogs/saveMonitor', iMonitorLogs.saveMonitor)
+router.get('/api/monitorlogs/getMonitor', iMonitorLogs.getMonitor)
 // ******************************cweb************************/
 // blogsnav
 router.get('/cweb/blogsNav/getBlogsNav', cBlogsNav.getBlogsNav)

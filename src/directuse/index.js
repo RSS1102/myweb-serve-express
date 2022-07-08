@@ -13,7 +13,6 @@ const job = new CronJob('00 00 00 * * *', function () {
 // 执行
 direct = () => {
     job.start();
-    
 }
 module.exports = {
     direct
