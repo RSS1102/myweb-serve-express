@@ -21,12 +21,34 @@ module.exports = {
         }
         )
     },
-    getMonitor(req, res) {
-        MonitorLogs.findAll().then(data => {
+    // 获取每个监控页面的数量
+    getMonitorName(req, res) {
+        MonitorLogs.count({
+            group: 'name',
+            logging: true,
+            attributes: ['name']
+        },
+        ).then(data => {
             res.send(data)
+            console.log(data)
         }).catch(err => {
             console.log(err)
         }
         )
+    },
+    // 获取blogs下的文章阅读数量
+    getMonitorKey(req, res) {
+        MonitorLogs.count({
+            group: 'paramsKey',
+            logging: true,
+            attributes: ['paramsKey'],
+            where: {name:'blogs'}
+        },
+        ).then(data => {
+            res.send(data)
+            console.log(data)
+        }).catch(err => {
+            console.log(err)
+        })
     }
 }

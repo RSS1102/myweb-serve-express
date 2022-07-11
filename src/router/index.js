@@ -16,7 +16,8 @@ router.post('/api/blogs/blogcontent', iBlogs.getBlogContent)
 router.get('/api/product/getgithublist', cProduct.getGithubList)
 //monitorlogs
 router.post('/api/monitorlogs/saveMonitor', iMonitorLogs.saveMonitor)
-router.get('/api/monitorlogs/getMonitor', iMonitorLogs.getMonitor)
+router.get('/api/monitorlogs/getMonitorName', iMonitorLogs.getMonitorName)
+router.get('/api/monitorlogs/getMonitorKey', iMonitorLogs.getMonitorKey)
 // ******************************cweb************************/
 // blogsnav
 router.get('/cweb/blogsNav/getBlogsNav', cBlogsNav.getBlogsNav)
