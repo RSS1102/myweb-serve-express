@@ -1,4 +1,6 @@
+const sequelize = require('sequelize');
 const { MonitorLogs } = require('../../sql/cweb/monitorlogs');
+const { Blogs } = require('../../sql/iweb/blogs');
 // pv
 module.exports = {
     saveMonitor(req, res) {
@@ -38,17 +40,18 @@ module.exports = {
     },
     // 获取blogs下的文章阅读数量
     getMonitorKey(req, res) {
-        MonitorLogs.count({
-            group: 'paramsKey',
-            logging: true,
-            attributes: ['paramsKey'],
-            where: {name:'blogs'}
-        },
-        ).then(data => {
+        Blogs.findAll({
+            include: {
+                model: MonitorLogs,
+                group: 'blogsKey',
+                attributes: ['blogsKey'],
+                where: { name: 'blogs' },
+            }
+        }).then(data => {
             res.send(data)
-            console.log(data)
         }).catch(err => {
-            console.log(err)
+            res.send(err)
         })
+
     }
 }

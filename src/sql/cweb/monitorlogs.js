@@ -1,36 +1,36 @@
 const { db } = require('../db/db');
+const { Blogs } = require('../iweb/blogs');
 const { DataTypes } = require('sequelize');
 const MonitorLogs = db.define('monitorlogs', {
     id: {
-
-        field: 'id',
-        type: DataTypes.INTEGER,
+        type: DataTypes.INTEGER(11),
         primaryKey: true,
-        autoIncrement: true,
         allowNull: false,
+        autoIncrement: true,
         unique: true,
-        comment: 'id',
     },
-    'name': {
-        field: 'name',
+    name: {
         type: DataTypes.STRING,
     },
-    'vitstDate': {
-        field: 'vitstDate',
+    vitstDate: {
         type: DataTypes.DATE,
     },
-    'path': {
-        field: 'path',
+    path: {
         type: DataTypes.STRING,
     },
-    'paramsKey': {
-        field: 'paramsKey',
-        type: DataTypes.STRING,
+    blogsKey: {
+        type: DataTypes.INTEGER(11),
+
     },
+},
+    {
+        timestamps: true,
+        //自动添加createdAt,updatedAt字段
+    }
+)
 
-})
+//  MonitorLogs.sync({ force: true });
 
-//  MonitorLogs.sync({ force: true })
 module.exports = {
     MonitorLogs
 }

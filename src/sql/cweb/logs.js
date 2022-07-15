@@ -22,6 +22,7 @@ const Logs = db.define('logs', {
 })
 
 // Logs.sync({ force: true })
+
 module.exports = {
     Logs
 }
