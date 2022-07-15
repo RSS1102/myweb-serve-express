@@ -4,12 +4,12 @@ const { Blogs } = require('../../sql/iweb/blogs');
 // pv
 module.exports = {
     saveMonitor(req, res) {
-        let { name, vitstDate, path, paramsKey } = req.body;
+        let { name, vitstDate, path, blogsKey } = req.body;
         MonitorLogs.create({
             name,
             vitstDate,
             path,
-            paramsKey
+            blogsKey
         }).then(data => {
             res.send({
                 code: 200,

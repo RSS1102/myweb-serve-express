@@ -22,9 +22,6 @@ const Blogs = db.define('blogs', {
     blogContent: {
         type: DataTypes.STRING
     },
-    visitedNum: {
-        type: DataTypes.INTEGER,
-    },
     articleShow: {
         type: DataTypes.BOOLEAN,
     },

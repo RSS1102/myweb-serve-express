@@ -8,13 +8,14 @@ module.exports = {
     /**
      * 文章保存
      * @param {blogContent: 文章内容,blogNav:文章分类,blogNavId:文章分类id,blogTitle:标题}
-     * @param {visitedNum:浏览人数,articleShow:是否展示文章,}
-     * @retrun {code} res 
+     * @param {articleShow:是否展示文章,}
+     * @deprecated visitedNum:浏览人数,
+     * @retrun code res 
      */
     async saveBlogs(req, res) {
         console.log("req.body", req.body)
         const body = req.body
-        let param = { ...body, visitedNum: 0, articleShow: true }
+        let param = { ...body, articleShow: true }
         console.log("param", param)
         Blogs.create(param).then(_res => {
             // console.log("res", res)
