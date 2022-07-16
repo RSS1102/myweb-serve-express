@@ -1,8 +1,10 @@
 const { Blogs } = require('../../sql/iweb/blogs');
+const { MonitorLogs } = require('../../sql/cweb/monitorlogs');
+
 module.exports = {
-  /**
-   * @param {*} res 查询blogs的导航栏
-   */
+    /**
+     * @param {*} res 查询blogs的导航栏
+     */
     async getBlogMenu(req, res) {
         const BlogMenu = await Blogs.findAll({
             attributes: ['blogNav', 'blogTitle', 'id'],
@@ -29,12 +31,18 @@ module.exports = {
     async getBlogContent(req, res) {
         console.log(res.body)
         let id = req.body.id
-        let Content = await Blogs.findAll({
+        let theBlogs = await Blogs.findAll({
             where: {
                 id: id
+            },
+            include: {
+                model: MonitorLogs,
+                group: 'blogsKey',
+                attributes: ['blogsKey'],
+                where: { name: 'blogs' },
             }
         });
-        res.send(Content[0])
+        res.send(theBlogs[0])
     },
 
 }

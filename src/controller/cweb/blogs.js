@@ -35,7 +35,7 @@ module.exports = {
 
 
     /**
-     * 分页、按条件获取文章
+     * 分页、按条件获取文章table
      * @param {offset:页码,limit:每页条数,blogNav:文章分类}
      * @retrun {code} res
      */
@@ -64,7 +64,7 @@ module.exports = {
 
     },
     /**
-     * 获取到上传文件信息
+     * 上传文件
      * @param {file} req 
      * @param {{err:{code:400,msg:"请上传正确的图片格式"},success:{location,code:200,msg:"图片上传成功"}}} res 
      */

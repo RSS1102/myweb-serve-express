@@ -1,5 +1,4 @@
 const { db } = require('../db/db');
-const { Blogs } = require('../iweb/blogs');
 const { DataTypes } = require('sequelize');
 const MonitorLogs = db.define('monitorlogs', {
     id: {

@@ -23,7 +23,7 @@ module.exports = {
         }
         )
     },
-    // 获取每个监控页面的数量
+    // 获取每个监控页面（主路由）的数量
     getMonitorName(req, res) {
         MonitorLogs.count({
             group: 'name',
@@ -52,6 +52,5 @@ module.exports = {
         }).catch(err => {
             res.send(err)
         })
-
     }
 }

@@ -11,7 +11,7 @@ const cOperationLogs = require('../controller/cweb/operationlogs')
 //************************iweb******************************/
 // blogs
 router.get('/api/blogs/getblogmenu', iBlogs.getBlogMenu)
-router.post('/api/blogs/blogcontent', iBlogs.getBlogContent)
+router.post('/api/blogs/getBlogContent', iBlogs.getBlogContent)
 //getGithubList
 router.get('/api/product/getgithublist', cProduct.getGithubList)
 //monitorlogs
